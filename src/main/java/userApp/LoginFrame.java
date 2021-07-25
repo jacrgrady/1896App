@@ -61,7 +61,7 @@ public class LoginFrame extends JFrame implements ActionListener {
        // container.add(showPassword);
         container.add(loginButton);
         container.add(newUserButton);
-        //container.add(guestButton);
+        container.add(guestButton);
     }
 
     public void addActionEvent() {

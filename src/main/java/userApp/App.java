@@ -12,7 +12,6 @@ public class App {
         users[2].setName("Ashley");
         users[3].setName("Rachel");
         users[4].setName("Slamantha");
-        Home app = new Home();
     }
     public User getCurrUser() {
         return this.currUser;
