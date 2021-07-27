@@ -1,4 +1,3 @@
-package userApp;
 
 public class Main {
     public static User[] users = new User[10];

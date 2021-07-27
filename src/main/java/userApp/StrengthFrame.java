@@ -1,4 +1,3 @@
-package userApp;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +19,24 @@ public class StrengthFrame extends JFrame implements ActionListener {
     private JButton high;
     public User user;
     private String userName;
-
+    SerialTest serialTest;
+    
+	public void StartSerial(){
+        serialTest = new SerialTest();
+        serialTest.initialize();
+        /*
+    	Thread t=new Thread() {
+    		public void run() {
+    			//the following line will keep this app alive for 1000 seconds,
+    			//waiting for events to occur and responding to them (printing incoming messages to console).
+    			try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
+    		}
+    	};
+    	t.start();
+    	*/
+    	System.out.println("Started");
+    	
+    }
 
     public StrengthFrame(User userSent) throws IOException {
         user = userSent;
@@ -32,6 +48,17 @@ public class StrengthFrame extends JFrame implements ActionListener {
         c = getContentPane();
         c.setBackground(Color.decode("#dce1f7"));
         c.setLayout(null);
+        
+        this.StartSerial();
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                e.getWindow().dispose();
+                serialTest.close();
+                System.out.println("JFrame Closed!");
+            }
+        });
 
         // TITLE
         if (userSent.getName() != null) {
@@ -91,22 +118,31 @@ public class StrengthFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object choice = e.getSource();
         String setting;
-        if (choice == low) {
-            user.setStrengthSetting(0);
-        }
-        else if (choice == high) {
-            user.setStrengthSetting(2);
-        }
-        else {
-            user.setStrengthSetting(1);
-        }
-        updateSetting();
-        if (user.getName() != null) {
-           // JOptionPane.showMessageDialog(null, user.getName()+", your strength setting is now "+setting);
-        }
-        else {
-           // JOptionPane.showMessageDialog(null, "Strength setting: "+setting);
-        }
+        
+        try {
+		
+	        
+	        if (choice == low) {
+	            user.setStrengthSetting(0);
+				serialTest.sendData('1');
+	        }
+	        else if (choice == high) {
+	            user.setStrengthSetting(2);
+				serialTest.sendData('2');
+	        }
+	        else {
+	            user.setStrengthSetting(1);
+	        }
+	        updateSetting();
+	        if (user.getName() != null) {
+	           // JOptionPane.showMessageDialog(null, user.getName()+", your strength setting is now "+setting);
+	        }
+	        else {
+	           // JOptionPane.showMessageDialog(null, "Strength setting: "+setting);
+	        }
+        } catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
         //System.exit(0);
     }

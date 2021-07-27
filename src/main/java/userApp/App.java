@@ -1,5 +1,3 @@
-package userApp;
-
 public class App {
     User[] users;
     User currUser = new User("user1", "test");

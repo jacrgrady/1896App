@@ -1,4 +1,3 @@
-package userApp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -111,6 +110,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 
 
         }
+    }
+    
+    public void windowClosing(ActionEvent e) {
+    	System.out.println("HELLO");
     }
 
 }

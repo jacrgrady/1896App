@@ -1,4 +1,3 @@
-package userApp;
 
 public class User {
     // user properties

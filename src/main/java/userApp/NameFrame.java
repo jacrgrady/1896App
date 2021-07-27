@@ -1,4 +1,3 @@
-package userApp;
 
 import javax.swing.*;
 import java.awt.*;
